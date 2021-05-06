@@ -1,0 +1,36 @@
+---
+name: continuous integration on main branch
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  test:
+    name: Molecule
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: checkout the codebase
+        uses: actions/checkout@v2
+
+      - name: set up python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      # we need this because Github provides ansible with pipx
+      - name: inject docker into pipx ansible
+        run: pipx inject ansible-base molecule-docker
+
+      - name: install test dependencies
+        run: pip3 install yamllint ansible-lint molecule[docker]
+
+      - name: run molecule tests
+        run: molecule test -s github
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'

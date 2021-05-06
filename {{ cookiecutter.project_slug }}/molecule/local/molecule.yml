@@ -1,0 +1,22 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+platforms:
+  - name: focal
+    box: ubuntu/focal64
+#    interfaces:
+#      - network_name: forwarded_port
+#        guest: 80
+#        host: 8080
+provisioner:
+  name: ansible
+verifier:
+  name: ansible

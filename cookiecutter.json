@@ -1,0 +1,9 @@
+{
+  "full_name": "Conrado Buhrer",
+  "email": "conrado@buhrer.net",
+  "github_username": "conrado",
+  "project_name": "Conrado Ansible Role",
+  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+  "project_short_description": "Just another Ansible Role Boilerplate created with cookiecutter. Uses github actions for CI and Vagrant/Virtualbox for local testing",
+  "version": "0.1.0"
+}
